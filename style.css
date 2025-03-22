@@ -392,7 +392,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center; /* Menyelaraskan konten secara vertikal */
     justify-content: center; /* Menyelaraskan konten secara horizontal */
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("images/IMG_20240429_092714.jpg") no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("Images/IMG_20240429_092714.jpg") no-repeat center center/cover;
     height: 100vh;
     min-height: 500px;
     color: #fff;
