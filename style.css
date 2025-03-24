@@ -11,6 +11,11 @@ html{
     scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* custom scroll bar */
 ::-webkit-scrollbar {
     width: 10px;
