@@ -520,6 +520,7 @@ nav ul li a:hover {
     background: #222;
     text-align: center;
     border-radius: 6px;
+    margin-bottom: 20px;
     padding: 50px 25px;
     cursor: pointer;
     transition: all 0.3s ease;
