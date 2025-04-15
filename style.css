@@ -462,16 +462,23 @@ nav ul li a:hover {
     content: "Villa Merapi 2";
 }
 .about .about-content .left{
-    width: 45%;
+    width: 40%;
 }
 .about .about-content .left img{
     height: 400px;
     width: 400px;
     object-fit: cover;
     border-radius: 6px;
+    
 }
+
 .about .about-content .right{
-    width: 55%;
+    width: 50%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: flex-start;
 }
 .about .about-content .right .text{
     font-size: 25px;
@@ -484,52 +491,51 @@ nav ul li a:hover {
 .about .about-content .right p{
     text-align: justify;
 }
-.about .about-content .right a{
-    display: inline-block;
-    background: crimson;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 10px 30px;
-    margin-top: 20px;
-    border-radius: 6px;
-    border: 2px solid crimson;
-    transition: all 0.3s ease;
-}
-.about .about-content .right a:hover{
-    color: crimson;
-    background: none;
-}
+
 
 /* services section styling */
-.services, .teams{
+.services{
     color:#fff;
     background: #111;
 }
-.services .title::before,
-.teams .title::before{
+.services .title::before{
     background: #fff;
 }
-.services .title::after,
-.teams .title::after{
+.services .title::after{
     background: #111;
     content: "Villa Merapi 2";
 }
+.services .serv-content {
+    align-items: stretch;
+}
 .services .serv-content .card{
+    display: flex;
+    flex-direction: column;
     width: calc(33% - 20px);
     background: #222;
     text-align: center;
     border-radius: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding: 50px 25px;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.services .serv-content .card p {
+    font-size: 15px;
+    color: #ddd;
+    line-height: 1.6;
+    margin-top: 10px;
 }
 .services .serv-content .card:hover{
     background: crimson;
 }
 .services .serv-content .card .box{
     transition: all 0.3s ease;
+    flex-grow: 1; /* ini yang bikin isi card ngisi seluruh tinggi */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .services .serv-content .card:hover .box{
     transform: scale(1.05);
@@ -548,8 +554,8 @@ nav ul li a:hover {
     margin: 10px 0 7px 0;
 }
 
-  /* Gallery section styling */
-  .gallery .title::after{
+/* Gallery section styling */
+.gallery .title::after{
     content: "Villa Merapi 2";
 }
 
@@ -573,19 +579,34 @@ nav ul li a:hover {
     height: 100%; /* Menyesuaikan tinggi panorama dengan tinggi container */
 }
 
+#panorama-options {
+    padding: 20px 40px;
+    background-color: #fff;
+    border-top: 2px solid #ddd;
+}
+
 /* Slick Slider Container */
 .slider {
     width: 100%;
     margin: 20px auto;
+    cursor: pointer;
 }
-
 .slick-slide {
     margin: 0px 10px;
 }
-
 .slick-slide img {
     width: 100%;
     border-radius: 5px;
+}
+.scene {
+    transition: transform 0.3s ease;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.scene:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 /* contact section styling */
@@ -806,5 +827,8 @@ footer span a:hover{
         font-size: 23px;
         line-height: 38px;
     }
-    
+    .services .serv-content .card{
+        width: calc(50% - 10px);
+        margin-bottom: 20px;
+    }
 }
