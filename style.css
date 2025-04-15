@@ -526,6 +526,9 @@ nav ul li a:hover {
     color: #ddd;
     line-height: 1.6;
     margin-top: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 .services .serv-content .card:hover{
     background: crimson;
@@ -831,4 +834,10 @@ footer span a:hover{
         width: calc(50% - 10px);
         margin-bottom: 20px;
     }
+    .services .serv-content .card p {
+        font-size: 14px;
+      }
+      .services .serv-content .card .text {
+        font-size: 20px;
+      }
 }
