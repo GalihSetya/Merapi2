@@ -599,33 +599,35 @@ nav ul li a:hover {
     margin: 0px 10px;
 }
 .scene img {
-    max-height: 100px;
-    object-fit: cover;
-}
+    width: 100%;
+    display: block;
+  }
 .slick-slide img {
     width: 100%;
     border-radius: 5px;
 }
 .scene {
-    transition: transform 0.3s ease;
+    position: relative;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: hidden;
-}
-.scene .scene-label {
+    transition: transform 0.3s ease;
+  }
+  .scene .scene-label {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
-    padding: 5px;
+    padding: 6px 10px;
     font-size: 14px;
     text-align: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
   }
 .scene.active {
     border: 2px solid crimson;
@@ -637,6 +639,7 @@ nav ul li a:hover {
 }
 .scene:hover .scene-label {
     opacity: 1;
+    transform: translateY(0);
   }
 
 /* contact section styling */
