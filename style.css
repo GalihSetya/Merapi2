@@ -674,6 +674,7 @@ nav ul li a:hover {
 
 .contact .contact-content .left p {
     text-align: justify;
+    margin-bottom: 20px;
 }
 
 .contact .contact-content .left .icons {
@@ -690,6 +691,7 @@ nav ul li a:hover {
     font-size: 25px;
     color: crimson;
     width: 30px;
+    min-width: 30px;
 }
 
 .contact .contact-content .row .info {
@@ -702,9 +704,10 @@ nav ul li a:hover {
 
 .contact .contact-content .info .sub-title {
     color: #333;
+    font-size: 15px;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
     .contact .contact-content {
         flex-direction: column;
@@ -717,6 +720,15 @@ nav ul li a:hover {
     .contact .contact-content .column iframe {
         width: 100% !important;
         height: 300px;
+    }
+
+    .contact .contact-content .row {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .contact .contact-content .row .info {
+        margin-left: 10px;
     }
 }
 
