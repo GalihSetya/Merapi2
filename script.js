@@ -355,34 +355,35 @@ viewer.on('scenechange', function (sceneId) {
 $(document).ready(function () {
     $('.slider').slick({
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,
+        arrows: true,
+        dots: false,
         responsive: [
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 2,
+                    slidesToScroll: 1
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1
+                    slidesToShow: 2,
+                    slidesToScroll: 1
                 }
             }
         ]
     });
 
-    // Tambahkan event listener ke setiap item slider untuk memuat scene
+    // Event listener untuk klik thumbnail
     $('.slider .scene').on('click', function () {
         const sceneId = $(this).data('scene');
         viewer.loadScene(sceneId);
-
-        // Simpan scene yang dipilih ke sessionStorage
         sessionStorage.setItem('lastScene', sceneId);
     });
 });
-
 
 

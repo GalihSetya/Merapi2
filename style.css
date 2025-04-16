@@ -600,7 +600,9 @@ nav ul li a:hover {
 }
 .scene img {
     width: 100%;
+    height: auto;
     display: block;
+    object-fit: cover;
   }
   .slick-slide img {
     width: 100%;
