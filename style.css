@@ -602,7 +602,7 @@ nav ul li a:hover {
     width: 100%;
     display: block;
   }
-.slick-slide img {
+  .slick-slide img {
     width: 100%;
     border-radius: 5px;
 }
