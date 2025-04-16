@@ -657,9 +657,9 @@ nav ul li a:hover {
 
 .contact .contact-content {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 30px;
+    align-items: stretch;
+    flex-wrap: wrap;
 }
 
 .contact .contact-content .column {
