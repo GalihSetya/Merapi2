@@ -91,267 +91,192 @@ const handleNavAmination = () => {
     });
 };
 
+// --- Class untuk Mengelola Virtual Tour ---
+class VirtualTour {
+    constructor(containerId, scenes, initialScene) {
+        this.containerId = containerId;
+        this.scenes = scenes;
+        this.initialScene = initialScene || 'Depanvilla';
+        this.viewer = null;
+        this.init();
+    }
+
+    init() {
+        this.viewer = pannellum.viewer(this.containerId, {
+            default: {
+                firstScene: this.initialScene,
+                autoLoad: true,
+                autoRotate: -2,
+                showZoomCtrl: true,
+                showFullscreenCtrl: true
+            },
+            scenes: this.scenes
+        });
+
+        this.viewer.on('scenechange', (sceneId) => {
+            sessionStorage.setItem('lastScene', sceneId);
+        });
+    }
+
+    loadScene(sceneId) {
+        this.viewer.loadScene(sceneId);
+        sessionStorage.setItem('lastScene', sceneId);
+    }
+}
+
+// Konfigurasi scenes (dipindahkan dari kode lama)
+const scenesConfig = {
+    Depanvilla: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/DepanVilla",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: 7, yaw: 2, type: "scene", text: "Go to Aula", sceneId: "Aula" },
+            { pitch: -2.1, yaw: 55, type: "scene", text: "Go to Parkiran", sceneId: "Parkiran" }
+        ]
+    },
+    Aula: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Aula",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: 0, yaw: -45, type: "scene", text: "Go to Depanvilla", sceneId: "Depanvilla" },
+            { pitch: 0, yaw: 30, type: "scene", text: "Go to Kamar1", sceneId: "Kamar1" },
+            { pitch: 0, yaw: 45, type: "scene", text: "Go to Kamar2", sceneId: "Kamar2" },
+            { pitch: 0, yaw: 100, type: "scene", text: "Go to Kamar3", sceneId: "Kamar3" },
+            { pitch: 0, yaw: 140, type: "scene", text: "Go to DepanDapur", sceneId: "DepanDapur" }
+        ]
+    },
+    Parkiran: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Parkiran",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: -5, yaw: -35, type: "scene", text: "Go to Depanvilla", sceneId: "Depanvilla" },
+            { pitch: -5, yaw: 135, type: "scene", text: "Go to Lapangan", sceneId: "Lapangan" }
+        ]
+    },
+    Lapangan: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Lapangan",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: 0, yaw: -100, type: "scene", text: "Go to Parkiran", sceneId: "Parkiran" }
+        ]
+    },
+    Kamar1: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Kamar1",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: -5, yaw: 125, type: "scene", text: "Go to Aula", sceneId: "Aula" }
+        ]
+    },
+    Kamar2: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Kamar2",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: -5, yaw: 170, type: "scene", text: "Go to Aula", sceneId: "Aula" }
+        ]
+    },
+    Kamar3: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Kamar3",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: -5, yaw: 180, type: "scene", text: "Go to Aula", sceneId: "Aula" }
+        ]
+    },
+    Kamar4: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/Kamar4",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: 7, yaw: 2, type: "scene", text: "Go to DepanDapur", sceneId: "DepanDapur" }
+        ]
+    },
+    DepanDapur: {
+        type: "multires",
+        multiRes: {
+            basePath: "./panorama/DepanDapur",
+            path: "/%l/%s%y_%x",
+            fallbackPath: "./fallback/%s",
+            extension: "jpg",
+            tileResolution: 512,
+            maxLevel: 3,
+            cubeResolution: 8192
+        },
+        hotSpots: [
+            { pitch: 0, yaw: 77, type: "scene", text: "Go to Aula", sceneId: "Aula" },
+            { pitch: 0, yaw: 150, type: "scene", text: "Go to Kamar4", sceneId: "Kamar4" }
+        ]
+    }
+};
 
 // Ambil scene terakhir dari sessionStorage jika tersedia
-const lastScene = sessionStorage.getItem('lastScene') || 'Depanvilla'; // Default scene "Depanvilla"
+const lastScene = sessionStorage.getItem('lastScene') || 'Depanvilla';
 
-// Inisialisasi Pannellum Viewer dengan scene terakhir
-const viewer = pannellum.viewer('panorama', {
-    default: {
-        firstScene: lastScene,
-        autoLoad: true,
-        autoRotate: -2,
-        showZoomCtrl: true,
-        showFullscreenCtrl: true
-    },
-    scenes: {
-        Depanvilla: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/DepanVilla",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: 7,
-                    yaw: 2,
-                    type: "scene",
-                    text: "Go to Aula",
-                    sceneId: "Aula"
-                },
-                {
-                    pitch: -2.1,
-                    yaw: 55,
-                    type: "scene",
-                    text: "Go to Parkiran",
-                    sceneId: "Parkiran"
-                }
-            ]
-        },
-        Aula: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Aula",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: 0,
-                    yaw: -45,
-                    type: "scene",
-                    text: "Go to Depanvilla",
-                    sceneId: "Depanvilla"
-                },
-                {
-                    pitch: 0,
-                    yaw: 30,
-                    type: "scene",
-                    text: "Go to Kamar1",
-                    sceneId: "Kamar1"
-                },
-                {
-                    pitch: 0,
-                    yaw: 45,
-                    type: "scene",
-                    text: "Go to Kamar2",
-                    sceneId: "Kamar2"
-                },
-                {
-                    pitch: 0,
-                    yaw: 100,
-                    type: "scene",
-                    text: "Go to Kamar3",
-                    sceneId: "Kamar3"
-                },
-                {
-                    pitch: 0,
-                    yaw: 140,
-                    type: "scene",
-                    text: "Go to DepanDapur",
-                    sceneId: "DepanDapur"
-                }
-            ]
-        },
-        Parkiran: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Parkiran",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: -5,
-                    yaw: -35,
-                    type: "scene",
-                    text: "Go to Depanvilla",
-                    sceneId: "Depanvilla"
-                },
-                {
-                    pitch: -5,
-                    yaw: 135,
-                    type: "scene",
-                    text: "Go to Lapangan",
-                    sceneId: "Lapangan"
-                }
-            ]
-        },
-        Lapangan: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Lapangan",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: 0,
-                    yaw: -100,
-                    type: "scene",
-                    text: "Go to Parkiran",
-                    sceneId: "Parkiran"
-                }
-            ]
-        },
-        Kamar1: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Kamar1",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: -5,
-                    yaw: 125,
-                    type: "scene",
-                    text: "Go to Aula",
-                    sceneId: "Aula"
-                }
-            ]
-        },
-        Kamar2: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Kamar2",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: -5,
-                    yaw: 170,
-                    type: "scene",
-                    text: "Go to Aula",
-                    sceneId: "Aula"
-                }
-            ]
-        },
-        Kamar3: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Kamar3",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: -5,
-                    yaw: 180,
-                    type: "scene",
-                    text: "Go to Aula",
-                    sceneId: "Aula"
-                }
-            ]
-        },
-        Kamar4: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/Kamar4",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: 7,
-                    yaw: 2,
-                    type: "scene",
-                    text: "Go to DepanDapur",
-                    sceneId: "DepanDapur"
-                }
-            ]
-        },
-        DepanDapur: {
-            type: "multires",
-            multiRes: {
-                basePath: "./panorama/DepanDapur",
-                path: "/%l/%s%y_%x",
-                fallbackPath: "./fallback/%s",
-                extension: "jpg",
-                tileResolution: 512,
-                maxLevel: 3,
-                cubeResolution: 8192
-            },
-            hotSpots: [
-                {
-                    pitch: 0,
-                    yaw: 77,
-                    type: "scene",
-                    text: "Go to Aula",
-                    sceneId: "Aula"
-                },
-                {
-                    pitch: 0,
-                    yaw: 150,
-                    type: "scene",
-                    text: "Go to Kamar4",
-                    sceneId: "Kamar4"
-                }
-            ]
-        }
-    }
-});
+// Inisialisasi objek VirtualTour
+const tour = new VirtualTour('panorama', scenesConfig, lastScene);
 
-// Simpan scene terakhir ke sessionStorage saat berubah
-viewer.on('scenechange', function (sceneId) {
-    sessionStorage.setItem('lastScene', sceneId);
-});
-
-// Inisialisasi Slick Slider
+// Slick Slider + event listener klik thumbnail
 $(document).ready(function () {
     $('.slider').slick({
         slidesToShow: 3,
@@ -378,11 +303,9 @@ $(document).ready(function () {
         ]
     });
 
-    // Event listener untuk klik thumbnail
     $('.slider .scene').on('click', function () {
         const sceneId = $(this).data('scene');
-        viewer.loadScene(sceneId);
-        sessionStorage.setItem('lastScene', sceneId);
+        tour.loadScene(sceneId);
     });
 });
 
